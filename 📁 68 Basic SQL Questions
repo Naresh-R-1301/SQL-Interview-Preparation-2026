@@ -1,0 +1,260 @@
+################################################################################################################################################
+
+| Column         | Description                                                         |
+| -------------- | ------------------------------------------------------------------- |
+| **Emp_ID**     | Unique identifier assigned to each employee.                        |
+| **First_Name** | Employee's first name.                                              |
+| **Department** | Department where the employee works (HR, IT, Finance, Sales, etc.). |
+| **Salary**     | Monthly salary of the employee.                                     |
+| **City**       | Employee's work location.                                           |
+| **Hired_Date** | Date the employee joined the organization.                          |
+| **Phone_No**   | Employee's contact number.                                          |
+| **Bonus**      | Additional incentive paid to the employee.                          |
+| **Manager_ID** | Identifier of the employee's reporting manager.                     |
+
+
+INSERT INTO Employees
+(Emp_ID, First_Name, Department, Salary, City, Hired_Date, Phone_No, Bonus, Manager_ID)
+VALUES
+(1, 'Arun', 'HR', 25000, 'Chennai', '2024-01-15', 9876543210, 2000, 101),
+(2, 'Priya', 'IT', 45000, 'Bangalore', '2024-02-10', 9876543211, 5000, 102),
+(3, 'Karthik', 'Sales', 35000, 'Chennai', '2024-03-05', 9876543212, 3000, 101),
+(4, 'Divya', 'IT', 50000, 'Hyderabad', '2024-04-12', 9876543213, 6000, 102),
+(5, 'Rahul', 'Finance', 40000, 'Mumbai', '2024-05-18', 9876543214, 4000, 103),
+(6, 'Anu', 'HR', 28000, 'Chennai', '2024-06-22', 9876543215, 2500, 101),
+(7, 'Vijay', 'Sales', 38000, 'Coimbatore', '2024-07-01', 9876543216, 3500, 104),
+(8, 'Meena', 'Finance', 42000, 'Bangalore', '2024-08-14', 9876543217, 4500, 103),
+(9, 'Suresh', 'IT', 55000, 'Chennai', '2024-09-10', 9876543218, 7000, 102),
+(10, 'Lakshmi', 'HR', 30000, 'Madurai', '2024-10-05', 9876543219, 2800, 101)
+
+
+###################################################################################################################################################
+
+-- 1. Display all employee details.  
+select * from emp;
+
+--  2. Display only employee names and salaries.  
+select first_name , salary from emp;
+ 
+-- 3. Display employee names, departments, and cities.
+select   first_name , department,city from emp;
+
+-- 4. Display all employee phone numbers.  
+select phone_no from emp;
+
+-- 5. Display all hired dates.  
+select hired_date from emp;
+
+-- 6. Display all unique departments.  
+select distinct department from emp;
+
+-- 7. Display all unique cities.  
+select distinct city from emp;
+
+-- 8. Display unique department-city combinations.  
+select distinct department , city  from emp;
+
+-- 9. Display unique salary values.  
+select distinct salary from emp;
+
+-- 10. Display unique manager IDs. 
+select distinct manager_id from emp;
+
+-- 11. Display employees whose salary is greater than 40,000. 
+select * from emp where salary > 40000; 
+
+-- 12. Display employees working in the IT department.  
+select * from emp where department ='IT';
+
+-- 13. Display employees from Chennai.  
+select * from emp where city='Chennai';
+
+-- 14. Display employees hired after June 1, 2024.  
+select * from emp where hired_date > '2024-6-01' ;
+
+-- 15. Display employees whose bonus is greater than or equal to 5,000.  
+select * from emp where bonus >= 5000;
+
+-- 16. Display employees whose names start with 'A'.
+select * from emp where first_name like 'a%';  
+
+-- 17. Display employees whose names end with 'a'.  
+select * from emp where first_name like '%a';  
+
+-- 18. Display employees whose names contain 'ya'.  
+select * from emp where first_name like '%ya%';  
+
+-- 19. Display employees whose city starts with 'C'.  
+select * from emp where city like 'C%';  
+
+-- 20. Display employees whose second letter is 'r'. 
+select * from emp where first_name like '_r%';
+
+-- 21. Display employees working in HR or IT departments.  
+select * from emp where department ='HR' or department = 'IT';
+
+-- 22. Display employees located in Chennai or Bangalore.  
+select * from emp where city ='chennai' or city ='bangalore';
+
+-- 23. Display employees whose salary is 25,000, 30,000, or 50,000.  
+select * from emp where salary in ( 25000 , 30000 , 50000);
+
+-- 24. Display employees managed by Manager IDs 101 and 102.  
+select * from emp where manager_id in (101 ,102);
+
+-- 25. Display employees belonging to Sales, Finance, or HR departments. 
+select * from emp where department in ('sales','finance','hr') order by department;
+
+select * from emp where department in ('sales','finance') or department = 'hr' order by department;
+
+-- 26. Display employees who are not in the HR department.  
+select * from emp where Department not in ('HR');
+
+-- 27. Display employees who are not from Chennai.
+select * from emp where city not in ('chennai');  
+
+-- 28. Display employees whose salaries are not 25,000 or 28,000.  
+select * from emp where Salary not in (25000,28000);
+
+-- 29. Display employees not managed by Manager ID 102.  
+select * from emp where Manager_ID not in (102 );
+
+-- 30. Display employees not working in IT or Sales. 
+select * from emp where Department in ('IT' ,'Sales');
+
+-- 31. Display employees whose Manager_ID is NULL.
+select * from emp where Manager_ID is null;
+  
+-- 32. Display only employee names whose Manager_ID is NULL.
+select First_Name from emp where Manager_ID is null;  
+
+--  33. Count employees whose Manager_ID is NULL.  
+select count(*)  from emp where Manager_ID is null;
+
+-- 34. Display employees whose Manager_ID is not NULL.  
+select * from emp where Manager_ID is not null;
+
+-- 35. Display employee names and Manager_ID where Manager_ID is not NULL.
+select First_Name , Manager_ID  from emp where Manager_ID is not null  ;
+
+-- 36. Count employees whose Manager_ID is not NULL. 
+select count(*) from emp where Manager_ID is not null;
+
+-- 37. Display employees whose salary is between 30,000 and 45,000.  
+select * from emp where Salary between 30000 and 45000; 
+
+-- 38. Display employees hired between March 1, 2024 and August 31, 2024.  
+select * from emp where Hired_Date between '2024-03-01' and '2024-08-31';
+
+-- 39. Display employees whose bonus is between 3,000 and 6,000.  
+select * from emp where Bonus between 3000 and 6000;
+
+-- 40. Display employees whose Emp_ID is between 3 and 8. 
+select * from emp where Emp_ID between 3 and 8;
+
+-- 41. Display employees whose salary is not between 30,000 and 45,000.  
+select * from emp where salary not between 30000 and 45000;
+
+-- 42. Display employees whose bonus is not between 3,000 and 5,000.  
+select * from emp where Bonus not between 3000 and 5000;
+
+-- 43. Display employees hired outside the period April 1, 2024 to September 1, 2024.  
+select * from emp where Hired_Date not between '2024-04-01' and '2024-09-01';
+
+-- 44. Display IT employees earning more than 45,000.  
+select * from emp where Department ='IT' and Salary > 45000;
+
+-- 45. Display Chennai employees earning at least 30,000.  
+select * from emp where City ='chennai' and Salary >= 30000;
+
+-- 46. Display employees working in HR or Finance departments. 
+select * from emp where Department ='HR' or Department ='finance';
+ 
+-- 47. Display employees from Chennai or Bangalore.  
+select * from emp where city ='chennai' or city ='bangalore';
+
+-- 48. Display employees who are not working in the IT department.  
+select * from emp where Department <> 'IT';
+
+-- 49. Find:  Total salary paid to all employees.  
+select sum(salary) from emp;
+
+-- 50 Average salary.
+select avg(salary) average from emp;
+  
+-- 51 Total number of employees.  
+select count(emp_id) from emp;
+
+-- 52 Highest salary.  
+select max(salary) from emp;
+
+-- 53 Lowest salary. 
+select min(salary) from emp;
+
+-- 54. Write queries to display:  • Current date using CURRENT_DATE()  
+select current_date() ;
+
+-- 55 Current time using CURRENT_TIME()  
+select current_time() ;
+
+-- 56 Current date and time using NOW()  
+select now() ;
+
+-- 57 Current date in DD-MM-YYYY format using DATE_FORMAT()  
+SELECT DATE_FORMAT(CURDATE(), '%d-%m-%Y') as current_dates;
+
+-- 58 Current time in 12-hour AM/PM format using TIME_FORMAT()  
+SELECT TIME_FORMAT(CURTIME(), '%h:%i:%s %p') as current_times;
+
+--  ***********************************   Challenge Questions  ************************
+
+
+-- 59 Find the number of employees in each department using COUNT().  
+select department, count(*) number_of_employee from emp
+group by Department;
+
+-- 60 Find the average salary department-wise.  
+select department , avg(salary) from emp
+group by Department;
+
+-- 61 Find the highest salary in each department.  
+select department , max(salary) from emp
+group by department;
+
+-- 62 Find departments where the average salary exceeds 40,000.  
+select department , avg(salary) from emp
+group by department
+having avg(Salary) > 40000;
+
+-- 63 Find employees whose names contain exactly 5 characters.  
+select * from emp
+having length(first_name) = 5;
+
+-- 64 Find employees whose names start with 'A' and end with 'n'.   
+select * from emp
+where first_name like'A%N';
+
+-- 65 Find employees who have not been assigned a manager and belong to Chennai.
+select * from emp
+where Manager_ID is null 
+and City ='Chennai';
+  
+ -- 66 Find employees whose salary is greater than the average salary of all employees.  
+select * from emp
+where salary > (select avg(Salary) from emp);
+
+-- 67 Display the employee with the highest salary.  
+select * from emp 
+order by Salary desc
+limit 1;
+
+-- 68 Display the employee with the second-highest salary.
+select * from emp
+order by salary desc
+limit 1 offset 1;
+
+
+
+
+
+
