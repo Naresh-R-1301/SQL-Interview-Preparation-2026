@@ -1,0 +1,599 @@
+1. Which command is used to create a new table?
+
+A) INSERT
+B) CREATE
+C) ALTER
+D) UPDATE
+
+Answer A:
+The CREATE command is a DDL (Data Definition Language) command used to create database objects such as tables, databases, views, and indexes.
+---
+
+2. Which statement creates a database?
+
+A) CREATE DATABASE dbname;
+B) NEW DATABASE dbname;
+C) DATABASE CREATE dbname;
+D) MAKE DATABASE dbname;
+
+Answer A:
+CREATE DATABASE is the correct SQL syntax to create a new database.
+---
+
+3. Which command is used to create a table?
+
+A) CREATE TABLE
+B) NEW TABLE
+C) MAKE TABLE
+D) ADD TABLE
+
+Answer A:
+The CREATE TABLE statement is used to create a new table in a database.
+---
+
+4. Which keyword is used to define a primary key while creating a table?
+
+A) UNIQUE
+B) PRIMARY KEY
+C) FOREIGN KEY
+D) CHECK
+
+Answer B:
+PRIMARY KEY uniquely identifies each record in a table and does not allow NULL values.
+---
+
+5. Which of the following is valid syntax?
+
+A) CREATE TABLE Student(id INT);
+B) TABLE CREATE Student(id INT);
+C) CREATE Student TABLE(id INT);
+D) NEW TABLE Student(id INT);
+
+Answer A:
+This is the correct SQL syntax for creating a table named Student with one integer column id.
+---
+
+
+6. Which command creates a database object used to store data?
+
+A) CREATE TABLE
+B) CREATE VIEW
+C) CREATE INDEX
+D) CREATE USER
+
+Answer A:
+A table is the primary database object used to store data in rows and columns.
+---
+
+7. Which command is used to create an index?
+
+A) INDEX CREATE
+B) CREATE INDEX
+C) ADD INDEX
+D) MAKE INDEX
+
+Answer B:
+The CREATE INDEX statement creates an index to improve query performance.
+---
+
+8. Which clause can be used while creating a table?
+
+A) PRIMARY KEY
+B) ORDER BY
+C) HAVING
+D) GROUP BY
+
+Answer A:
+PRIMARY KEY is a table constraint that can be defined when creating a table. ORDER BY, HAVING, and GROUP BY are used in SELECT queries.
+---
+
+9. Which SQL category does CREATE belong to?
+
+A) DML
+B) DDL
+C) DCL
+D) TCL
+
+Answer B:
+CREATE is a Data Definition Language (DDL) command used to define database objects.
+---
+
+10. Which command creates a view?
+
+A) CREATE VIEW
+B) NEW VIEW
+C) ADD VIEW
+D) VIEW CREATE
+
+Answer A:
+The CREATE VIEW statement creates a virtual table based on a SQL query.
+---
+
+11. Which command is used to add records to a table?
+
+A) UPDATE
+B) DELETE
+C) INSERT
+D) ALTER
+
+Answer C:
+The INSERT statement adds one or more rows into a table.
+---
+
+12. Which keyword specifies the target table in an INSERT statement?
+
+A) INTO
+B) TO
+C) IN
+D) TABLE
+
+Answer A:
+The correct syntax is INSERT INTO table_name (...) VALUES (...);
+---
+
+13. Which clause contains the values to be inserted?
+
+A) WHERE
+B) VALUES
+C) FROM
+D) SET
+
+Answer B:
+The VALUES clause specifies the data that will be inserted into the table.
+---
+
+14. Which statement inserts a row into a table?
+
+A) INSERT INTO Student VALUES(...);
+B) ADD INTO Student VALUES(...);
+C) NEW Student VALUES(...);
+D) INSERT Student(...);
+
+Answer A:
+INSERT INTO is the standard SQL syntax for inserting rows.
+---
+
+15. Can INSERT add multiple rows in a single statement?
+
+A) Yes
+B) No
+C) Only in Oracle
+D) Only in SQL Server
+
+Answer A:
+SQL supports inserting multiple rows in a single INSERT statement.
+---
+
+
+16. What happens when a datatype mismatch occurs during insertion?
+
+A) Record inserted
+B) Error generated
+C) Warning only
+D) Table dropped
+
+Answer B
+A datatype mismatch usually causes an error.
+---
+
+17. Which statement copies data from another table?
+
+A) INSERT INTO ... SELECT
+B) COPY INTO
+C) INSERT FROM
+D) MOVE INTO
+
+Answer A
+INSERT INTO ... SELECT copies data from another table.
+---
+
+18. Can NULL values be inserted into a table?
+
+A) Yes
+B) No
+C) Only in numeric columns
+D) Only in primary keys
+
+Answer A
+NULL values can be inserted if the column allows NULL.
+---
+
+19. If column names are omitted, values must be supplied in:
+
+A) Any order
+B) Alphabetical order
+C) Table column order
+D) Reverse order
+
+Answer C
+If column names are omitted, values must follow the table's defined column order.
+---
+
+20. INSERT command belongs to:
+
+A) DDL
+B) DML
+C) DCL
+D) TCL
+
+Answer B:
+INSERT is a Data Manipulation Language (DML) command because it is used to add new records into a table.
+---
+
+21. Which command modifies existing records?
+
+A) UPDATE
+B) ALTER
+C) MODIFY
+D) CHANGE
+
+Answer A:
+The UPDATE statement is used to modify existing records in a table.
+---
+
+22. Which clause specifies new values in UPDATE?
+
+A) SET
+B) VALUES
+C) WHERE
+D) FROM
+
+Answer A:
+The SET clause is used to assign new values to one or more columns.
+---
+
+23. Which clause limits the rows to be updated?
+
+A) ORDER BY
+B) GROUP BY
+C) WHERE
+D) HAVING
+
+Answer C
+The WHERE clause specifies which rows should be updated.
+---
+
+24. What happens if WHERE is omitted in UPDATE?
+
+A) Error
+B) One row updated
+C) All rows updated
+D) No rows updated
+
+Answer C
+If the WHERE clause is omitted, every row in the table is updated.
+---
+
+25. Which statement is valid?
+
+A) UPDATE Student SET Marks = 90;
+B) CHANGE Student Marks = 90;
+C) MODIFY Student Marks = 90;
+D) EDIT Student Marks = 90;
+
+Answer A
+The correct syntax for updating data is:
+UPDATE table_name
+SET column_name = value;
+---
+
+26. Can multiple columns be updated in one statement?
+
+A) Yes
+B) No
+C) Only two columns
+D) Only in MySQL
+
+Answer A
+Yes. Multiple columns can be updated by separating them with commas.
+---
+
+27. UPDATE primarily affects:
+
+A) Structure
+B) Data
+C) Database
+D) Index
+
+Answer B
+UPDATE changes the data stored in a table. It does not change the table structure.
+---
+
+28. Which operator is commonly used in SET clause?
+
+A) =
+B) >
+C) <
+D) !=
+
+Answer A
+The assignment operator (=) assigns a new value to a column in the SET clause.
+---
+
+29. Which clause can be combined with UPDATE?
+
+A) WHERE
+B) GROUP BY
+C) HAVING
+D) LIMIT only
+
+Answer A
+The WHERE clause is commonly used with the UPDATE statement to specify which rows should be updated. Without WHERE, all rows in the table are updated.
+---
+
+30. UPDATE belongs to:
+
+A) DDL
+B) DML
+C) DCL
+D) TCL
+
+Answer A
+UPDATE is a Data Manipulation Language (DML) command because it modifies existing data in a table.
+---
+
+31. Which command removes records from a table?
+
+A) DROP
+B) DELETE
+C) REMOVE
+D) CLEAR
+
+Answer B
+The DELETE statement removes one or more rows from a table. It does not delete the table itself.
+---
+
+32. DELETE affects:
+
+A) Rows
+B) Columns
+C) Database
+D) Views
+
+Answer A
+DELETE removes rows (records) from a table. It does not remove columns, the database, or views.
+---
+
+33. Which clause is commonly used with DELETE?
+
+A) GROUP BY
+B) WHERE
+C) HAVING
+D) ORDER BY
+
+Answer B
+The WHERE clause specifies which records should be deleted.
+---
+
+34. What happens if WHERE is omitted in DELETE?
+
+A) Error
+B) No rows deleted
+C) All rows deleted
+D) One row deleted
+
+Answer C
+If you omit the WHERE clause, SQL deletes every row in the table.
+---
+
+35. DELETE command belongs to:
+
+A) DDL
+B) DML
+C) DCL
+D) TCL
+
+Answer A
+DELETE is a Data Manipulation Language (DML) command because it modifies the data stored in a table.
+---
+
+36. Which statement deletes a specific record?
+
+A) DELETE FROM Student WHERE StudentID = 1;
+B) REMOVE Student WHERE StudentID = 1;
+C) DROP Student WHERE StudentID = 1;
+D) CLEAR Student WHERE StudentID = 1;
+
+Answer A
+The correct syntax to delete a specific record is:
+DELETE FROM Student
+WHERE StudentID = 1;
+---
+
+37. DELETE removes:
+
+A) Data only
+B) Structure only
+C) Database only
+D) Constraints only
+
+Answer A
+The DELETE statement removes rows (data) from a table but does not remove the table structure.
+---
+
+38. Can DELETE be rolled back?
+
+A) Yes
+B) No
+C) Only in MySQL
+D) Only in Oracle
+
+Answer A
+If DELETE is executed inside a transaction and the transaction has not been committed, the deleted rows can be restored using ROLLBACK.
+---
+
+39. Which keyword identifies the table in DELETE?
+
+A) FROM
+B) INTO
+C) TABLE
+D) TO
+
+Answer A
+The FROM keyword specifies the table from which rows should be deleted.
+---
+
+40. DELETE can be used with:
+
+A) WHERE
+B) JOIN
+C) Subqueries
+D) All of the above
+
+Answer D
+DELETE can be combined with:
+
+WHERE to delete specific rows.
+JOIN (supported by databases like MySQL and SQL Server) to delete rows based on another table.
+Subqueries to delete rows matching a query result.
+---
+
+41. DROP is used to remove:
+
+A) Database objects
+B) Records only
+C) Values only
+D) Rows only
+
+Answer A
+The DROP statement removes entire database objects such as:
+
+Tables
+Databases
+Views
+Indexes
+
+Once dropped, both the structure and data are removed.
+---
+
+42. DROP TABLE removes:
+
+A) Data only
+B) Structure only
+C) Structure and data
+D) Constraints only
+
+Answer C
+Explanation:
+
+DROP TABLE permanently removes:
+
+Table structure
+All records
+Constraints
+Indexes
+---
+
+43. DROP belongs to:
+
+A) DML
+B) DDL
+C) DCL
+D) TCL
+
+Answer B
+DROP is a Data Definition Language (DDL) command because it changes the database structure.
+
+Other DDL commands include:
+
+CREATE
+ALTER
+TRUNCATE
+DROP
+RENAME
+---
+
+44. Which statement removes an entire table?
+
+A) DROP TABLE Student;
+B) DELETE Student;
+C) REMOVE TABLE Student;
+D) CLEAR TABLE Student;
+
+Answer A
+Correct syntax:
+
+DROP TABLE Student;
+---
+
+45. Which command removes a database?
+
+A) DROP DATABASE
+B) DELETE DATABASE
+C) REMOVE DATABASE
+D) CLEAR DATABASE
+
+Answer A
+Correct syntax:
+
+DROP DATABASE CollegeDB;
+----
+
+46. Which command removes a view?
+
+A) DROP VIEW
+B) DELETE VIEW
+C) REMOVE VIEW
+D) CLEAR VIEW
+
+Answer A
+The DROP VIEW statement permanently removes a view from the database.
+--- 
+
+47. Which command removes an index?
+
+A) DROP INDEX
+B) DELETE INDEX
+C) REMOVE INDEX
+D) CLEAR INDEX
+
+Answer A
+The DROP INDEX statement removes an index from a table, which may affect query performance.
+---
+
+48. Is DROP generally reversible without backup?
+
+A) Yes
+B) No
+C) Sometimes
+D) Depends on datatype
+
+Answer B
+The DROP command permanently removes the database object. Unless you have a backup or the DBMS provides recovery features, it cannot be undone.
+---
+
+49. What happens to data after DROP TABLE?
+
+A) Preserved
+B) Archived
+C) Removed
+D) Hidden
+
+Answer C
+DROP TABLE deletes:
+
+The table
+All rows
+The table structure
+Constraints and indexes
+
+Everything is permanently removed.
+---
+
+50. Which object can be removed using DROP?
+
+A) Table
+B) Database
+C) View
+D) All of the above
+
+Answer D
+The DROP command can remove many database objects, including:
+
+Tables
+Databases
+Views
+
+---
+Indexes
+---
