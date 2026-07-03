@@ -1,0 +1,366 @@
+ -- Section 1 – Date & Time (10 Questions)
+ 
+-- Q1 Find employees who joined in the same calendar month regardless of the year.
+
+select emp_id , emp_name , department , joining_date, monthname(joining_date) from employees 
+ WHERE MONTH(joining_date) IN
+(
+    SELECT m
+    FROM
+    (
+        SELECT MONTH(joining_date) AS m
+        FROM employees
+        GROUP BY MONTH(joining_date)
+        HAVING COUNT(*) > 1
+    ) x
+)
+order by month(joining_date) , joining_date ;
+
+###  Q2 Find employees who joined during the last 3 years from the current date.
+
+select * from employees
+where year(joining_date) between year(curdate()) -3 and year(curdate())
+order by year(joining_date) ; 
+
+
+### Q3 Find employees whose work experience is between 2 and 5 years as of today.
+
+select * from employees
+where joining_date between date_sub(curdate() , interval(5) year) and 
+						date_sub(curdate() , interval(2) year);
+
+### Q4 Find employees who joined in the first quarter (Jan–Mar).
+select * from employees
+where month(joining_date) between 1 and 3;
+
+### Q5 Find employees who joined in the second half of the year (Jul–Dec).
+select * from employees
+where month(joining_date) between 1 and 3;
+
+### Q6 Find employees who joined on a weekend.
+select * from employees where  dayname(joining_date) in ('Saturday','sunday');
+ 
+ ---------------------------------  or  -----------------
+ 
+ SELECT * FROM employees WHERE WEEKDAY(joining_date) IN (5,6);
+
+-- Q7 Find employees who have completed more than 1000 days in the company.
+
+select * from employees where datediff(curdate() , joining_date) >1000 ;
+
+ --------  Q8 Find the total number of employees hired each year.
+ 
+ select  year(joining_date) , count(*) from employees
+ group by year(joining_date)
+ order by 1 ;
+ 
+-- Q9 Find employees whose joining anniversary falls in the current month.
+
+select * from employees
+where month(joining_date)  = month(curdate());
+
+-- Q10 Find the oldest employee in terms of company tenure.
+
+select * from employees order by joining_date asc 
+limit 1;
+
+-- Q11 Find IT employees earning more than ₹80,000 who are located in Chennai or Bangalore.
+
+select * from employees where salary > 80000 and city in ('Chennai' , 'Bangalore')
+and department ='IT';
+
+-- Q12 Find employees who are either in HR or Finance but earn more than ₹70,000.
+
+select * from employees where department in ('HR' ,'Finance') and salary > 70000;
+
+-- Q13 Find employees who are not from Chennai and not from Bangalore.
+
+select * from employees where department not in ('chennai' , 'banglore');
+
+-- Q14 Find employees whose salary is above ₹90,000 or whose joining date is before 2021.
+
+select * from employees where salary > 90000 or year(joining_date) < 2021;
+
+-- Q15 Find employees who satisfy all of the following:
+/*
+Department is IT
+Salary > 75,000
+Joined before 2023
+City is not Hyderabad  */
+
+select * from employees where department = 'IT' and salary > 75000 and year(joining_date) < 2023
+and city <> 'Hyderabad';
+
+ /* Q16 Find employees who satisfy either:
+
+Salary > ₹1,00,000
+Department is Sales
+
+but exclude employees from Mumbai.
+*/
+
+select * from employees where (salary >100000  or department ='Sales') and city <> 'mumbai';
+
+-- Q17 Find employees who are not in HR and whose salary is less than the company average salary.
+
+select * from employees where department <> 'HR' and salary < (select avg(salary) from employees);
+
+-- Q18 Find employees whose department is IT or Sales but whose salary is not between ₹70,000 and ₹90,000.
+
+select * from employees where ( department = 'IT' or department ='Sales' )and salary not between 70000 and 90000;
+
+-- Q19 Find employees who joined after 2022 and belong to Chennai, Bangalore, or Hyderabad.
+
+select * from employees where year(joining_date) > 2022 and city in ('Chennai' , 'Bangalore' , 'Hyderabad');
+
+/* Q20 Find employees who fail at least one of these conditions:
+
+Salary > ₹75,000
+Joined after 2021
+Department = IT   */
+
+select * from employees where ( salary <= 75000 or joining_date <= '2021-01-01' or department <> 'IT') ;
+
+-- Q21 Find employees working in IT, Finance, or Sales.
+
+select * from employees where department in ('it' ,'finance' ,'sales');
+
+-- Q22 Find orders whose status is either Completed or Pending.
+
+select * from orders where status in ('Completed' , 'pending');
+
+-- Q23 Find customers located in Chennai, Bangalore, or Pune.
+
+select * from customers where city in ('chennai' ,'bangalore' , 'pune');
+
+-- Q24 Find employees whose city belongs to the list of customer cities.
+
+select * from employees where city in (select city from customers);
+
+-- Q25 Find orders handled by employees with IDs 1, 5, 8, or 18.
+
+select * from orders where emp_id in (1,5,8,18);
+
+-- Q26 Find employees whose department belongs to departments having at least one employee earning more than ₹1,00,000.
+
+select * from employees where department in (select distinct department from employees  where salary > 100000); 
+
+--  Q27 Find customers who signed up in January, February, or March.
+
+select  * from customers where month(signup_date) in (1,2,3) ;
+
+-- Q28 Find employees whose joining month is among the months in which at least one customer signed up.
+
+select * from employees where month(joining_date) in ( select distinct month(signup_date) from customers);
+
+-- Section 4 – NOT IN (8 Questions)
+-- Q29 Find employees who never handled an order.
+
+select * from employees where emp_id not in (select emp_id from orders);  
+
+select * from employees where not exists ( select * from orders where employees.emp_id = orders.emp_id);
+
+-- Q30 Find customers who never placed any order.
+
+select * from customers where not exists ( select * from orders where customers.customer_id = orders.customer_id);
+
+
+-- Q31 Find employees whose city is not among the customer cities.
+
+select * from employees where not exists ( select * from customers where employees.city = customers.city);
+
+-- Q32 Find employees whose department is not IT, HR, or Sales.
+
+select * from employees where department not in ('it', 'hr','sales');
+
+-- Q33 Find orders whose status is neither Completed nor Pending.
+
+select * from orders where status in ('completed'  , 'pending');
+
+-- Q34 Find employees who never handled a completed order.
+
+select * from employees where not  exists ( select * from  orders where employees.emp_id = orders.emp_id and status = 'completed');
+
+-- Q35 Find customers who never signed up in the first half of the year.
+
+select * from customers where month(signup_date) not  between 1 and 6;
+
+-- Q36 Find employees who are not managers.
+
+SELECT *
+FROM employees e
+WHERE NOT EXISTS (
+    SELECT *
+    FROM employees m
+    WHERE m.manager_id = e.emp_id
+);
+
+/*
+Section 5 – Aggregate Functions (12 Questions)
+Q37 Find the total salary paid by each department.  */
+
+select sum(salary) , department from employees 
+group by department;
+
+-- Q38 Find the average salary of each department.
+select avg(salary) , department from employees
+group by department;
+
+-- Q39 Find the maximum and minimum salary in every department.
+select department, max(salary) Maxminum_Salary, min(salary) MIN_Salary from employees
+group by department;
+
+-- Q40 Find departments having more than 3 employees.
+select department from employees
+group by department
+having count(emp_id)>3;
+
+-- Q41 Find departments whose average salary exceeds ₹85,000.
+select department from employees
+group by department
+having avg(salary) > 85000;
+
+-- Q42 Find the total order amount generated by each employee.
+select emp_id , ceil(sum(amount)) Total_order_amount from orders
+group by emp_id;
+
+-- Q43 Find the average completed order amount.
+select avg(amount) from orders
+where status ="Completed";
+
+-- Q44 Find the highest completed order amount.
+select max(amount) from orders where status ="Completed";
+
+-- Q45 Find the number of orders handled by each employee.
+select emp_id , count(order_id) total_order from orders group by emp_id;
+
+-- Q46 Find employees who handled more than 2 completed orders.
+select emp_id , count(order_id) total_order from orders group by emp_id
+having count(order_id) > 2;
+
+-- Q47 Find departments where the total salary exceeds ₹3,00,000.
+select department , sum(salary) from  employees group by department having sum(salary)>300000;
+
+-- Q48 Find the percentage of completed orders among all orders.
+select round(sum(case when status="Completed" then 1 else 0 end) *100 /count(*),2) Percentage
+from orders;
+
+-- Section 6 – DISTINCT (7 Questions)
+
+-- Q49 Find all unique departments.
+select distinct department from employees;
+
+-- Q50 Find all unique cities where employees work.
+select distinct city from employees;
+
+-- Q51 Find the number of distinct employee cities.
+select count(distinct city) from employees;
+
+-- Q52 Find the number of distinct customer cities.
+select count(distinct city) from customers;
+
+-- Q53 Find distinct order statuses.
+select distinct status from orders;
+
+-- Q54 Find unique combinations of department and city.
+select distinct department , city from employees order by 1,2;
+
+-- Q55 Find the city that has the highest number of distinct departments.
+
+select city , count(distinct department) from  employees 
+group by city order by 2 desc limit 1;
+
+-- Section 7 – LIKE (10 Questions)
+-- Q56 Find employees whose names start with 'A'.
+
+select * from employees where emp_name like'A%';
+
+-- Q57 Find employees whose names end with 'a'.
+select * from employees where emp_name like'%A';
+
+-- Q58 Find employees whose names contain 'ar'.
+select * from employees where emp_name like '%ar%';
+
+-- Q59 Find employees whose names have exactly five characters.
+select * from employees where emp_name like'_____';
+
+-- Q60 Find employees whose second character is 'a'.
+select * from employees where emp_name like'_a%';
+
+-- Q61 Find employees whose third character is 'e'.
+select * from employees where emp_name like'__e%';
+
+-- Q62 Find cities ending with 'i'.
+select * from employees where city like'%i';
+
+-- Q63 Find customer names starting with 'T'.
+select * from customers where customer_name like'T%';
+
+-- Q64 Find employees whose names contain at least two occurrences of the letter 'a'.
+select * from employees where emp_name like '%a%a%';
+
+-- Q65 Find employees whose names neither start with 'A' nor end with 'a'.
+select * from employees where emp_name like 'a%' or emp_name like '%a';
+
+-- Section 8 – BETWEEN / NOT BETWEEN (10 Questions)
+-- Q66 Find employees earning between ₹70,000 and ₹90,000.
+select * from employees where salary between 70000 and 90000;
+
+-- Q67 Find employees who joined between 2021-01-01 and 2023-12-31.
+select * from employees where joining_date between '2021-01-01' and '2023-12-31';
+
+-- Q68 Find orders placed between 2025-03-01 and 2025-07-01.
+select * from orders where order_date between '2025-03-01' and '2025-07-01';
+
+-- Q69 Find customers who signed up between April and September.
+select * from customers where month(signup_date) between 4 and 9;
+
+-- Q70 Find employees whose salary is not between ₹60,000 and ₹1,00,000.
+select *  from employees where salary not between 60000 and 100000;
+
+-- Q71 Find orders whose amount is between ₹5,000 and ₹10,000.
+select * from orders where amount between 5000 and 10000;
+
+-- Q72 Find employees whose experience is between 3 and 6 years.
+select * from employees where timestampdiff(year,joining_date,curdate()) between 3 and 6;
+
+-- Q73 Find employees whose joining date is not between 2022-01-01 and 2024-01-01.
+select * from employees where joining_date not between '2022-01-01' and '2021-01-01';
+
+-- Q74  Find customers who signed up in the first quarter using BETWEEN.
+select * from customers where month(signup_date) between 1 and 3;
+
+-- Q75 Find orders whose amount is not between the average order amount and the maximum order amount.
+select * from orders where amount not between (select avg(amount) from orders) and (select max(amount) from orders);
+
+-- Bonus Product-Based Business Questions (Very Common)
+
+-- Q76 Find the department with the highest payroll.
+select department , sum(salary) from employees
+group by department
+order by 2 desc limit 1;
+
+-- Q77 Find the month in which the highest number of orders were placed.
+select monthname(order_date) , count(month(order_date)) from orders
+group by monthname(order_date)
+order by 2 desc
+limit 1;
+
+-- Q78 Find employees who generated more than ₹20,000 in completed orders.
+select emp_id , sum(amount) from orders where status='Completed'
+group by emp_id
+having sum(amount) > 20000;
+
+-- Q79 Find the city with the highest number of employees.
+select city, count(*) from employees
+group by city
+order by 2 desc  limit 1;
+
+-- Q80 Find the percentage of employees in each department relative to the total workforce.
+select department , round(count(*) * 100 / (select count(*) from employees),2) from employees
+group by 1;
+
+-- Find the percentage of completed orders among all orders.
+select round(sum(case when status="Completed" then 1 else 0 end) *100 /count(*),2) Percentage
+from orders;
+
